@@ -12,6 +12,13 @@ project would be.
 
 ## Development
 
+Set environment variables to whatever MongoDB expects
+
+```
+export STATS_DB_USERNAME=username
+export STATS_DB_PASSWORD=password
+```
+
 Start server `npm start`
 
 Post an update `curl -X POST http://localhost:3000/update`
