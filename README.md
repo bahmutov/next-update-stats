@@ -9,3 +9,9 @@ from 1.0.0 to 2.0.0 breaks 200 times, is successful 300 times.
 
 Allows you to judge how likely a successful update for your
 project would be.
+
+## Development
+
+Start server `npm start`
+
+Post an update `curl -X POST http://localhost:3000/update`
