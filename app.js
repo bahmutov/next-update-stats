@@ -6,7 +6,6 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
-var update = require('./routes/update');
 var initDB = require('./db/init');
 
 var http = require('http');
@@ -34,13 +33,16 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
-app.post('/update', update.update);
 
 var username = process.env.STATS_DB_USERNAME;
 var password = process.env.STATS_DB_PASSWORD;
 var client = initDB(username, password);
 
-client.collection('updates').then(function (updates) {
+client.collection('updates').then(function (updatesCollection) {
+  var update = require('./routes/update')(updatesCollection);
+
+  app.post('/update', update.update);
+
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
   });
