@@ -1,5 +1,7 @@
 {
   "name": "next-update-stats",
+  "description": "Collects anonymous nodejs module version upgrade statistics",
+  "keywords": ["npm", "node", "package", "version", "upgrade", "statistics"],
   "version": "0.0.1",
   "private": true,
   "scripts": {
