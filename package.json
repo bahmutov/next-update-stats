@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node ./node_modules/nodemon/nodemon.js app.js"
   },
   "dependencies": {
     "express": "3.4.7",
     "jade": "1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "~0.7.10"
   }
 }
