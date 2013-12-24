@@ -12,7 +12,8 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./node_modules/nodemon/nodemon.js app.js"
+    "start": "node ./node_modules/nodemon/nodemon.js app.js",
+    "test": "node ./node_modules/gt ./routes/**/test/*.js --output"
   },
   "dependencies": {
     "express": "3.4.7",
