@@ -8,8 +8,16 @@ module.exports = function (updatesCollection) {
       console.log('params', req.params);
       var name = req.params.name;
       verify.unemptyString(name, 'missing package name');
-      res.send({
+      if (name.length > 30) {
+        throw new Error('package name ' + name + ' is too long');
+      }
+      updatesCollection.find({
         name: name
+      }).toArray(function (err, results) {
+        if (err) {
+          throw err;
+        }
+        res.send(results);
       });
     },
 
@@ -23,10 +31,18 @@ module.exports = function (updatesCollection) {
       verify.object(untrusted, 'expected JSON update info object');
       validate(untrusted);
 
-      res.send({
-        name: untrusted.name,
-        from: untrusted.from,
-        to: untrusted.to
+      updatesCollection.findOne(untrusted, function (err, found) {
+        if (err) {
+          throw err;
+        }
+        validate(found);
+        res.send({
+          name: found.name,
+          from: found.from,
+          to: found.to,
+          success: found.success || 0,
+          failure: found.failure || 0
+        });
       });
     }
   };

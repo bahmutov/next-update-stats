@@ -11,6 +11,7 @@ var initDB = require('./db/init');
 var http = require('http');
 var path = require('path');
 var Q = require('q');
+Q.longStackSupport = true;
 
 var app = express();
 
@@ -36,9 +37,12 @@ app.get('/users', user.list);
 
 var username = process.env.STATS_DB_USERNAME;
 var password = process.env.STATS_DB_PASSWORD;
-var client = initDB(username, password);
+initDB(username, password).then(startServer, function (err) {
+  console.error(err.stack);
+});
 
-client.collection('updates').then(function (updatesCollection) {
+function startServer(db) {
+  var updatesCollection = db.collection('updates');
   var update = require('./routes/update')(updatesCollection);
   app.post('/update', update.update);
 
@@ -49,7 +53,7 @@ client.collection('updates').then(function (updatesCollection) {
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
   });
-}).done();
+}
 
 process.on('exit', function () {
   console.log('closing DB connection');

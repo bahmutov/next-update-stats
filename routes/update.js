@@ -29,15 +29,14 @@ module.exports = function (updatesCollection) {
         upsert: true
       };
 
-      updatesCollection.findAndModify(query, null, update, options)
-        .then(function (stats) {
-          console.log('stats', stats);
-          res.send(stats[0]);
-        })
-        .fail(function (err) {
-          console.error(err.stack);
+      updatesCollection.findAndModify(query, null, update, options, function (err, stats) {
+        if (err) {
           throw err;
-        });
+        }
+
+        console.log('stats', stats);
+        res.send(stats);
+      });
     }
   };
 }
