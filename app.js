@@ -10,7 +10,7 @@ var initDB = require('./db/init');
 
 var http = require('http');
 var path = require('path');
-var Q = require('Q');
+var Q = require('q');
 
 var app = express();
 
