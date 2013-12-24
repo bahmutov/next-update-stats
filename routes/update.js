@@ -5,20 +5,21 @@ var validate = require('./validate-update');
 module.exports = function (updatesCollection) {
   return {
     update: function (req, res) {
-      verify.object(req.body, 'expected JSON update info object');
-      validate(req.body);
+      var untrusted = req.body;
+      verify.object(untrusted, 'expected JSON update info object');
+      validate(untrusted);
 
-      console.log('update info', req.body);
+      console.log('update info', untrusted);
 
       var query = {
-        name: 'lodash',
-        from: '1.0.0',
-        to: '2.0.0'
+        name: untrusted.name,
+        from: untrusted.from,
+        to: untrusted.to
       };
       var update = {
         $inc: {}
       };
-      if (!!update.success) {
+      if (!!untrusted.success) {
         update.$inc.success = 1;
       } else {
         update.$inc.failure = 1;
@@ -30,9 +31,11 @@ module.exports = function (updatesCollection) {
 
       updatesCollection.findAndModify(query, null, update, options)
         .then(function (stats) {
+          console.log('stats', stats);
           res.send(stats[0]);
         })
         .fail(function (err) {
+          console.error(err.stack);
           throw err;
         });
     }

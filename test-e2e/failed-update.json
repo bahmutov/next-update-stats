@@ -1,0 +1,6 @@
+{
+  "name": "--this-module-does-not-exist",
+  "from": "1.0.0",
+  "to": "2.0.0",
+  "success": false
+}
