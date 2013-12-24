@@ -34,3 +34,10 @@ You can test deployed Heroku app
 ```
 curl -X POST http://next-update.herokuapp.com/update -i -H "Content-Type: application/json" -d @failed-update.json
 ```
+
+## Fetching information
+
+```
+curl -i http://localhost:3000/package/lodash/1.0.0/2.0.0
+curl -i http://localhost:3000/package/lodash
+```

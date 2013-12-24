@@ -3,6 +3,7 @@
  * GET home page.
  */
 var pkg = require('../package.json');
+
 exports.index = function(req, res){
   res.render('index', {
     title: pkg.name,

@@ -40,8 +40,11 @@ var client = initDB(username, password);
 
 client.collection('updates').then(function (updatesCollection) {
   var update = require('./routes/update')(updatesCollection);
-
   app.post('/update', update.update);
+
+  var package = require('./routes/package')(updatesCollection);
+  app.get('/package/:name/:from/:to', package.probability);
+  app.get('/package/:name', package.info);
 
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
