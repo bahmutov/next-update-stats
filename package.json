@@ -13,8 +13,9 @@
   "private": true,
   "scripts": {
     "start": "node ./node_modules/nodemon/nodemon.js app.js",
-    "test": "node ./node_modules/gt ./routes/**/test/*.js --output"
+    "test": "node ./node_modules/gt ./db/**/test/*.js ./routes/**/test/*.js --output"
   },
+  "pre-commit": "npm test",
   "dependencies": {
     "express": "3.4.7",
     "jade": "1.0.0",
@@ -25,6 +26,7 @@
   },
   "devDependencies": {
     "nodemon": "~0.7.10",
-    "gt": "~0.8.21"
+    "gt": "~0.8.21",
+    "pre-git": "0.0.14"
   }
 }
