@@ -1,7 +1,14 @@
 {
   "name": "next-update-stats",
   "description": "Collects anonymous nodejs module version upgrade statistics",
-  "keywords": ["npm", "node", "package", "version", "upgrade", "statistics"],
+  "keywords": [
+    "npm",
+    "node",
+    "package",
+    "version",
+    "upgrade",
+    "statistics"
+  ],
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,9 +19,11 @@
     "jade": "1.0.0",
     "poseidon-mongo": "0.0.7",
     "check-types": "~1.1.1",
-    "q": "~0.9.7"
+    "q": "~0.9.7",
+    "semver": "~2.2.1"
   },
   "devDependencies": {
-    "nodemon": "~0.7.10"
+    "nodemon": "~0.7.10",
+    "gt": "~0.8.21"
   }
 }
