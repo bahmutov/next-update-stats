@@ -21,4 +21,16 @@ export STATS_DB_PASSWORD=password
 
 Start server `npm start`
 
-Post an update `curl -X POST http://localhost:3000/update`
+Post an update `curl -X POST http://localhost:3000/update` (should fail)
+
+inside folder *test-e2e* there are a few JSON files, you can try
+
+```
+curl -X POST http://localhost:3000/update -i -H "Content-Type: application/json" -d @failed-update.json
+```
+
+You can test deployed Heroku app
+
+```
+curl -X POST http://next-update.herokuapp.com/update -i -H "Content-Type: application/json" -d @failed-update.json
+```
