@@ -10,7 +10,7 @@
     "statistics"
   ],
   "version": "0.0.1",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "node ./node_modules/nodemon/nodemon.js app.js",
     "test": "node ./node_modules/gt ./db/**/test/*.js ./routes/**/test/*.js --output"
