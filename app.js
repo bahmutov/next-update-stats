@@ -34,6 +34,9 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.get('/version', function (req, res) {
+  res.send(require('./package.json').version);
+});
 
 var username = process.env.STATS_DB_USERNAME;
 var password = process.env.STATS_DB_PASSWORD;
