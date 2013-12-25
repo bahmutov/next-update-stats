@@ -27,11 +27,6 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-// development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
-}
-
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.get('/version', function (req, res) {
@@ -53,6 +48,7 @@ function startServer(db) {
   app.get('/package/:name/:from/:to', package.probability);
   app.get('/package/:name', package.info);
 
+  app.use(express.errorHandler());
   http.createServer(app).listen(app.get('port'), function(){
     console.log('Express server listening on port ' + app.get('port'));
   });

@@ -9,13 +9,19 @@ module.exports = function (updatesCollection) {
       var name = req.params.name;
       verify.unemptyString(name, 'missing package name');
       if (name.length > 30) {
-        throw new Error('package name ' + name + ' is too long');
+        console.error('package name ' + name + ' is too long');
+        res.send(400);
+        return;
       }
+
       updatesCollection.find({
         name: name
       }).toArray(function (err, results) {
         if (err) {
-          throw err;
+          console.error('search name', name);
+          console.error(err.stack);
+          res.send(500);
+          return;
         }
         res.send(results);
       });
@@ -29,13 +35,33 @@ module.exports = function (updatesCollection) {
         to: req.params.to
       };
       verify.object(untrusted, 'expected JSON update info object');
-      validate(untrusted);
+      try {
+        validate(untrusted);
+      } catch (err) {
+        console.error('user input', untrusted);
+        console.error(err);
+        res.send(400);
+        return;
+      }
 
       updatesCollection.findOne(untrusted, function (err, found) {
         if (err) {
           throw err;
         }
-        validate(found);
+        if (!found) {
+          res.send(404);
+          return;
+        }
+        try {
+          validate(found);
+        }
+        catch (err) {
+          console.error('user input', untrusted);
+          console.error('found', found);
+          console.error(err);
+          res.send(500);
+          return;
+        }
         res.send({
           name: found.name,
           from: found.from,
