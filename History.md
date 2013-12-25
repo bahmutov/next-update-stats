@@ -1,4 +1,9 @@
 
+0.0.4 / 2013-12-25
+==================
+
+  * more robust error handling
+
 0.0.3 / 2013-12-25
 ==================
 
@@ -6,7 +11,7 @@
   * added route to fetch upgrade information /package/name/from version/to version
   * added route to update information /update
 
-```json
+```
 {
     name: package name,
     from: semver start version,
