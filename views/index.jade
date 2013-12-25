@@ -2,6 +2,22 @@ extends layout
 
 block content
   h1= title
-  p
-    strong #{name}
-    |  #{description}
+  p.
+    #{description}.
+    Helps you decide if upgrading a dependency is likely to succeed.
+
+  h2 GET routes
+
+  :markdown
+    `/package/name`
+
+    returns all statistics for given package, [example](/package/lodash)
+
+    `/package/name/from version/to version`
+
+    returns statistics for updating package from and to specific version,
+    [example](/package/lodash/1.0.0/2.4.0) The versions should be `x.y.z` strings.
+
+    `/version`
+
+    returns #{name} server version
