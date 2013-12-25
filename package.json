@@ -1,6 +1,7 @@
 {
   "name": "next-update-stats",
   "description": "Collects anonymous nodejs module version upgrade statistics",
+  "version": "0.0.3",
   "keywords": [
     "npm",
     "node",
@@ -9,8 +10,14 @@
     "upgrade",
     "statistics"
   ],
-  "version": "0.0.2",
   "private": false,
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:bahmutov/next-update-stats.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bahmutov/next-update-stats/issues"
+  },
   "scripts": {
     "start": "node ./node_modules/nodemon/nodemon.js app.js",
     "test": "node ./node_modules/gt ./db/**/test/*.js ./routes/**/test/*.js --output"
