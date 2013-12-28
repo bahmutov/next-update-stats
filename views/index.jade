@@ -8,17 +8,13 @@ block content
 
   p Use with <a href="https://npmjs.org/package/next-update">next-update</a> dependency upgrade checker.
 
-  p Sample stats:
-  pre.
-    grunt-contrib-jshint 0.7.1 -> 0.7.2 success probability 100.00% 2 success(es) 0 failure(s)
-    pre-git 0.0.13 -> 0.0.14 success probability 100.00% 2 success(es) 0 failure(s)
-
   h2 Module update statistics
 
   div(ng-controller="next-update-stats-controller")
-    input(type="text", placeholder="package name", ng-model="packageName"
-      title="Enter package module to see update statistics")
-    button.btn(ng-click="loadStats()" title="click to search") Load
+    p See global upgrade statistics for a package
+      input(type="text", placeholder="package name", ng-model="packageName"
+        title="Enter package module to see update statistics")
+      button.btn(ng-click="loadStats()" title="click to search") Load
 
     ul
       li(ng-repeat="update in updates") {{update.name}} {{update.from}} -> {{update.to}} {{update.probability | number:0}}% {{update.success}} successful {{update.failure}} failed
