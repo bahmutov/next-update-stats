@@ -17,7 +17,11 @@ block content
       button.btn(ng-click="loadStats()" title="click to search") Load
 
     ul
-      li(ng-repeat="update in updates") {{update.name}} {{update.from}} -> {{update.to}} {{update.probability | number:0}}% {{update.success}} successful {{update.failure}} failed
+      li(ng-repeat="update in updates").
+        {{update.name}} {{update.from}} -> {{update.to}}
+        {{update.probability | number:0}}%
+        {{update.success}} successful
+        {{update.failure}} failed
 
   h2 GET routes
 
