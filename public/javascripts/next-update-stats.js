@@ -1,6 +1,12 @@
 (function (angular) {
   var verify = check.verify;
   var app = angular.module('next-update-stats', []);
+  app.filter('percent', function () {
+    return function (val) {
+      return val ? val.toFixed(0) + '%' : '';
+    };
+  });
+
   app.controller('next-update-stats-controller', function ($http, $scope) {
     $scope.packageName = 'lodash';
 
@@ -37,9 +43,10 @@
 
         $scope.header = [null].concat(toVersions);
         $scope.info = [];
-        Object.keys(fromVersions).forEach(function (from) {
+        Object.keys(fromVersions).sort().forEach(function (from) {
           var row = [];
-          row.push(from);
+          row.length = toVersions.length + 1;
+          row[0] = from;
           $scope.info.push(row);
           var updates = fromVersions[from];
           updates.forEach(function (update) {

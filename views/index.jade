@@ -14,23 +14,17 @@ block content
     p See global upgrade statistics for a package
       input(type="text", placeholder="package name", ng-model="packageName"
         title="Enter package module to see update statistics")
-      button.btn(ng-click="loadStats()" title="click to search") Load
+      button.btn.btn-default(ng-click="loadStats()" title="click to search") Load
 
-    ul
-      li(ng-repeat="update in updates").
-        {{update.name}} {{update.from}} -> {{update.to}}
-        {{update.probability | number:0}}%
-        {{update.success}} successful
-        {{update.failure}} failed
-
-    table(border="1")
+    table.table.table-condensed.table-bordered
       thead
         tr
           th(ng-repeat="version in header") {{version}}
       tbody
         tr(ng-repeat="row in info")
-          td(ng-repeat="to in row track by $index").
-            {{$first ? to : (to.probability|number:0) }}
+          td(ng-repeat="update in row track by $index",
+            title="{{$first ? 'Updating from version ' + update : update ? update.success + ' successful, ' + update.failure + ' failed' : 'No information available'}}").
+            {{$first ? update : (update.probability|percent:0) }}
 
   h2 GET routes
 
