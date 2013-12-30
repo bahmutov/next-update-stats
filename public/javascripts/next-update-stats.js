@@ -3,7 +3,7 @@
   var app = angular.module('next-update-stats', []);
   app.filter('percent', function () {
     return function (val) {
-      return val ? val.toFixed(0) + '%' : '';
+      return typeof val === 'number' ? val.toFixed(0) + '%' : '';
     };
   });
 
@@ -28,6 +28,7 @@
           update.probability = total === 0 ? 0 : update.success / total * 100;
           return update;
         });
+        $scope.updates = updates;
 
         var fromVersions = _.groupBy(updates, 'from');
         Object.keys(fromVersions).forEach(function (from) {
@@ -59,8 +60,6 @@
             }
           });
         });
-
-        $scope.updates = updates;
       });
     };
 
