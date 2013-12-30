@@ -1,4 +1,11 @@
 
+0.1.0 / 2013-12-29
+==================
+
+  * added fork on github banner, footer
+  * good bootstrap table with tooltips
+  * displaying upgrade grid
+
 0.0.4 / 2013-12-25
 ==================
 
