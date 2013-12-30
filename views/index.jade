@@ -8,6 +8,13 @@ block content
 
   p Use with <a href="https://npmjs.org/package/next-update">next-update</a> dependency upgrade checker.
 
+  h3 Why?
+  p.
+    Even if you have some tests, knowing if other people upgraded from version X of
+    module A to version Y in 100% of cases brings peace of mind. Similarly, if
+    most people had failed to upgrade automatically from X to Y, that means breaking
+    API changes and upgrade might be harder for your project.
+
   h2 Module update statistics
 
   div(ng-controller="next-update-stats-controller")
@@ -41,3 +48,18 @@ block content
     `/version`
 
     returns #{name} server version
+
+  h2 Small print
+
+  :markdown
+    Author: Gleb Bahmutov &copy; 2013
+
+    * [@bahmutov](https://twitter.com/bahmutov)
+    * [glebbahmutov.com](http://glebbahmutov.com)
+    * [blog](http://bahmutov.calepin.co/)
+
+    License: MIT - do anything with the code, but don't blame me if it does not work.
+
+    Spread the word: tweet, star on github, click *endorse*, etc.
+
+    Support: if you find any problems with this module, email / tweet / open issue on Github
