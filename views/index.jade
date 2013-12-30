@@ -23,6 +23,15 @@ block content
         {{update.success}} successful
         {{update.failure}} failed
 
+    table(border="1")
+      thead
+        tr
+          th(ng-repeat="version in header") {{version}}
+      tbody
+        tr(ng-repeat="row in info")
+          td(ng-repeat="to in row track by $index").
+            {{$first ? to : (to.probability|number:0) }}
+
   h2 GET routes
 
   :markdown
