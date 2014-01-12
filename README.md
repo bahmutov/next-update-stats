@@ -56,7 +56,7 @@ Author: Gleb Bahmutov &copy; 2013
 * [glebbahmutov.com](http://glebbahmutov.com)
 * [blog](http://bahmutov.calepin.co/)
 
-License: MIT - do anything with the code, but don't blame me if it does not work.
+License: [MIT](LICENSE-MIT) - do anything with the code, but don't blame me if it does not work.
 
 Spread the word: tweet, star on github, click *endorse*, etc.
 
