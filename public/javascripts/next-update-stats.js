@@ -37,9 +37,28 @@
       verify.array(toVersions, 'expected to versions to be an array, got ' +
         JSON.stringify(toVersions, null, 2));
 
+      function compareSemvers(a, b) {
+        var aparts = a.split('.');
+        var bparts = b.split('.');
+        if (aparts.length !== 3 || bparts.length !== 3) {
+          console.log('could not parse semver', a, 'or', b, 'for package', $scope.packageName);
+          return -1;
+        }
+        for(var k = 0; k < 3; k += 1) {
+          if (+aparts[k] < +bparts[k]) {
+            return -1;
+          }
+          if (+aparts[k] > +bparts[k]) {
+            return 1;
+          }
+        }
+        return 0;
+      }
+
       $scope.header = [null].concat(toVersions);
       $scope.info = [];
-      Object.keys(fromVersions).sort().forEach(function (from) {
+      var sortedFrom = Object.keys(fromVersions).sort(compareSemvers);
+      sortedFrom.forEach(function (from) {
         var row = [];
         row.length = toVersions.length + 1;
         row[0] = from;
