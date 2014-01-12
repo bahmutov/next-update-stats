@@ -23,7 +23,9 @@ block content
         title="Enter package module to see update statistics")
       button.btn.btn-default(ng-click="loadStats()" title="click to search") Load
 
-    table.table.table-condensed.table-bordered
+    p.not-found(ng-show="packageNotFoundMessage") {{packageNotFoundMessage}}
+
+    table.table.table-condensed.table-bordered(ng-show="updates")
       thead
         tr
           th(ng-repeat="version in header") {{version}}
