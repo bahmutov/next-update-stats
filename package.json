@@ -19,7 +19,7 @@
     "url": "https://github.com/bahmutov/next-update-stats/issues"
   },
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js app.js",
+    "start": "node ./node_modules/nodemon/bin/nodemon.js --ignore public/ app.js",
     "test": "node ./node_modules/gt ./db/**/test/*.js ./routes/**/test/*.js --output"
   },
   "pre-commit": "npm test",

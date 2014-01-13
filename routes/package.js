@@ -56,6 +56,7 @@ module.exports = function (updatesCollection) {
         res.send(400);
         return;
       }
+      name = name.toLowerCase();
 
       updatesCollection.find({
         name: name
@@ -88,6 +89,7 @@ module.exports = function (updatesCollection) {
         return;
       }
 
+      untrusted.name = untrusted.name.toLowerCase();
       updatesCollection.findOne(untrusted, function (err, found) {
         if (err) {
           throw err;
