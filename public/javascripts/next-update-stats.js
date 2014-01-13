@@ -89,12 +89,14 @@
 
     $scope.loadStats = function () {
       $scope.updates = [];
+      $scope.packageNotFoundMessage = null;
 
       verify.unemptyString($scope.packageName, 'expected package name string');
       if ($scope.packageName.length > 20) {
         throw new Error('invalid package name string ' + $scope.packageName);
       }
 
+      $scope.packageName = $scope.packageName.toLowerCase();
       $http.get('/package/' + $scope.packageName)
       .then(function (data) {
         if (!data.data || !data.data.length) {
