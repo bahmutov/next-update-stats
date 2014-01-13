@@ -13,6 +13,18 @@ a {
   font-style: italic;
 }
 
+.clear-both {
+  clear: both;
+}
+
+.totals-container {
+  width: 60%;
+}
+
 .totals {
   font-weight: bold;
+  padding: 1em;
+  width: 50%;
+  float: left;
+  font-size: 2em;
 }

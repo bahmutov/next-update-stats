@@ -15,10 +15,15 @@ block content
     most people had failed to upgrade automatically from X to Y, that means breaking
     API changes and upgrade might be harder for your project.
 
-  div.totals <strong>{{totalPackages}}</strong> total packages
-  div.totals <strong>{{totalUpdates}}</strong> total updates
+  div.totals-container
+    div.totals
+      span#packages 0
+      |  total packages
+    div.totals
+      span#updates 0
+      |  total updates
 
-  h2 Module update statistics
+  h2.clear-both Module update statistics
 
   div
     p See global upgrade statistics for a package
