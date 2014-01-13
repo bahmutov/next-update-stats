@@ -105,29 +105,31 @@
           processUpdates($scope.packageName, data);
         }
       });
-
-      $timeout(function () {
-        $http.get('/total/packages')
-        .then(function (data) {
-          verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
-          var totalPackages = data.data.totalPackages;
-          localStorage.setItem('packages', JSON.stringify(totalPackages));
-          var packagesAnimation = new countUp('packages', totalPackages, 0, 100);
-          packagesAnimation.start();
-        });
-
-        $http.get('/total/updates')
-        .then(function (data) {
-          // console.log('total updates', data);
-          verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
-          verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
-          var totalUpdates = +data.data.success + +data.data.failure;
-          localStorage.setItem('updates', JSON.stringify(totalUpdates));
-          var updatesAnimation = new countUp('updates', totalUpdates, 0, 100);
-          updatesAnimation.start();
-        });
-      }, 1000);
     };
+
+
+    function fetchTotals() {
+      $http.get('/total/packages')
+      .then(function (data) {
+        verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
+        var totalPackages = data.data.totalPackages;
+        localStorage.setItem('packages', JSON.stringify(totalPackages));
+        var packagesAnimation = new countUp('packages', totalPackages, 0, 100);
+        packagesAnimation.start();
+      });
+
+      $http.get('/total/updates')
+      .then(function (data) {
+        // console.log('total updates', data);
+        verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
+        verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
+        var totalUpdates = +data.data.success + +data.data.failure;
+        localStorage.setItem('updates', JSON.stringify(totalUpdates));
+        var updatesAnimation = new countUp('updates', totalUpdates, 0, 100);
+        updatesAnimation.start();
+      });
+    }
     $scope.loadStats();
+    $timeout(fetchTotals, 1000);
   });
 }(angular));
