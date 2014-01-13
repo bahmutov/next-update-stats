@@ -29,7 +29,6 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/version', function (req, res) {
   res.send(require('./package.json').version);
 });
@@ -48,6 +47,8 @@ function startServer(db) {
   var package = require('./routes/package')(updatesCollection);
   app.get('/package/:name/:from/:to', package.probability);
   app.get('/package/:name', package.info);
+  app.get('/total/packages', package.totalPackages);
+  app.get('/total/updates', package.totalUpdates);
 
   app.use(express.errorHandler());
   http.createServer(app).listen(app.get('port'), function(){

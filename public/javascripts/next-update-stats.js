@@ -92,6 +92,22 @@
           processUpdates($scope.packageName, data);
         }
       });
+
+      $http.get('/total/packages')
+      .then(function (data) {
+        console.log('total packages', data);
+        verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
+        $scope.totalPackages = data.data.totalPackages;
+      });
+
+      $http.get('/total/updates')
+      .then(function (data) {
+        console.log('total updates', data);
+        verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
+        verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
+        $scope.totalPackages = +data.data.success + +data.data.failure;
+      });
+
     };
 
     $scope.loadStats();

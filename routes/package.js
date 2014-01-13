@@ -4,6 +4,43 @@ var validate = require('./validate-update');
 
 module.exports = function (updatesCollection) {
   return {
+    // finds total number of packages in DB
+    totalPackages: function (req, res) {
+      updatesCollection.count(function (err, count) {
+        if (err) {
+          res.send(500);
+          return;
+        }
+        res.send({
+          totalPackages: count
+        });
+      })
+    },
+
+    totalUpdates: function (req, res) {
+      var groupTotals = {
+        $group: {
+          _id: '',
+          success: { $sum: '$success' },
+          failure: { $sum: '$failure' }
+        }
+      };
+      updatesCollection.aggregate([groupTotals],
+        function (err, data) {
+        if (err) {
+          console.error('Could not get total number of updates');
+          console.error(err);
+          res.send(500);
+          return;
+        }
+        res.send({
+          success: data[0].success,
+          failure: data[0].failure
+        });
+      });
+    },
+
+    // info about single package - finds its all updates
     info: function (req, res) {
       console.log('params', req.params);
       var name = req.params.name;
@@ -27,6 +64,7 @@ module.exports = function (updatesCollection) {
       });
     },
 
+    // finds specific from-to-package update information
     probability: function (req, res) {
       console.log('params', req.params);
       var untrusted = {
