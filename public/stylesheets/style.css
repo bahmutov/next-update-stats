@@ -12,3 +12,7 @@ a {
   font-size: large;
   font-style: italic;
 }
+
+.totals {
+  font-weight: bold;
+}

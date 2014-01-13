@@ -9,6 +9,9 @@
 
   app.controller('next-update-stats-controller', function ($http, $scope) {
     $scope.packageName = 'lodash';
+    $scope.packageNotFoundMessage = null;
+    $scope.totalPackages = 0;
+    $scope.totalUpdates = 0;
 
     function processUpdates(packageName, data) {
       verify.unemptyString(packageName, 'missing package name');
@@ -78,7 +81,7 @@
 
     $scope.loadStats = function () {
       $scope.updates = [];
-      $scope.packageNotFoundMessage = null;
+
       verify.unemptyString($scope.packageName, 'expected package name string');
       if ($scope.packageName.length > 20) {
         throw new Error('invalid package name string ' + $scope.packageName);
@@ -95,17 +98,17 @@
 
       $http.get('/total/packages')
       .then(function (data) {
-        console.log('total packages', data);
+        // console.log('total packages', data);
         verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
         $scope.totalPackages = data.data.totalPackages;
       });
 
       $http.get('/total/updates')
       .then(function (data) {
-        console.log('total updates', data);
+        // console.log('total updates', data);
         verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
         verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
-        $scope.totalPackages = +data.data.success + +data.data.failure;
+        $scope.totalUpdates = +data.data.success + +data.data.failure;
       });
 
     };
