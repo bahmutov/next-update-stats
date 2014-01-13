@@ -1,13 +1,23 @@
 (function (angular) {
   var verify = check.verify;
+
   var app = angular.module('next-update-stats', []);
+
+  app.run(function () {
+    var values = ['packages', 'updates'];
+    values.forEach(function (name) {
+      var n = JSON.parse(localStorage.getItem(name)) || 0;
+      document.getElementById(name).innerHTML = n;
+    });
+  });
+
   app.filter('percent', function () {
     return function (val) {
       return typeof val === 'number' ? val.toFixed(0) + '%' : '';
     };
   });
 
-  app.controller('next-update-stats-controller', function ($http, $scope) {
+  app.controller('next-update-stats-controller', function ($http, $scope, $timeout) {
     $scope.packageName = 'lodash';
     $scope.packageNotFoundMessage = null;
 
@@ -94,25 +104,28 @@
         }
       });
 
-      $http.get('/total/packages')
-      .then(function (data) {
-        verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
-        var packagesAnimation = new countUp('packages', data.data.totalPackages, 0, 1);
-        packagesAnimation.start();
-      });
+      $timeout(function () {
+        $http.get('/total/packages')
+        .then(function (data) {
+          verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
+          var totalPackages = data.data.totalPackages;
+          localStorage.setItem('packages', JSON.stringify(totalPackages));
+          var packagesAnimation = new countUp('packages', totalPackages, 0, 100);
+          packagesAnimation.start();
+        });
 
-      $http.get('/total/updates')
-      .then(function (data) {
-        // console.log('total updates', data);
-        verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
-        verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
-        var totalUpdates = +data.data.success + +data.data.failure;
-        var updatesAnimation = new countUp('updates', totalUpdates, 0, 1);
-        updatesAnimation.start();
-      });
-
+        $http.get('/total/updates')
+        .then(function (data) {
+          // console.log('total updates', data);
+          verify.number(+data.data.success, 'invalid number of successful updates ' + data.data);
+          verify.number(+data.data.failure, 'invalid number of failed updates ' + data.data);
+          var totalUpdates = +data.data.success + +data.data.failure;
+          localStorage.setItem('updates', JSON.stringify(totalUpdates));
+          var updatesAnimation = new countUp('updates', totalUpdates, 0, 100);
+          updatesAnimation.start();
+        });
+      }, 1000);
     };
-
     $scope.loadStats();
   });
 }(angular));
