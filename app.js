@@ -1,11 +1,5 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express');
 var routes = require('./routes');
-var user = require('./routes/user');
 var initDB = require('./db/init');
 
 var http = require('http');
@@ -51,13 +45,8 @@ function startServer(db) {
   app.get('/total/updates', package.totalUpdates);
 
   app.use(express.errorHandler());
-  http.createServer(app).listen(app.get('port'), function(){
+  http.createServer(app).listen(app.get('port'), function onStarted() {
     console.log('Express server listening on port ' + app.get('port'));
   });
 }
-
-process.on('exit', function () {
-  console.log('closing DB connection');
-  client.close();
-});
 

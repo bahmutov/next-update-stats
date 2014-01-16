@@ -5,12 +5,6 @@ var Db = require('mongodb').Db,
     MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server;
 
-/*
-var Mongo = require('poseidon-mongo');
-var Driver = Mongo.Driver;
-var Database = Mongo.Database;
-*/
-
 module.exports = function(username, password) {
   verify.unemptyString(username, 'missing username');
   verify.unemptyString(password, 'missing password');
@@ -22,10 +16,7 @@ module.exports = function(username, password) {
 
   var uri = 'mongodb://' + username + ':' + password + '@' + host + ':' + port + '/' + name;
 
-  MongoClient.connect(uri, {w:1},
-
-  // var connection = new Db(name, new Server(uri, port), {w: 1});
-  /*connection.open(*/function (err, db) {
+  MongoClient.connect(uri, {w:1}, function onConnected(err, db) {
     if (err) {
       defer.reject(err);
       return;
@@ -35,14 +26,5 @@ module.exports = function(username, password) {
   });
   return defer.promise;
 
-  /*
-  Driver.configure('connection1', {
-    hosts: [username + ':' + password + '@' + host + ':' + port],
-    database: db,
-    options: { w: 1 }
-  });
-
-  client = new Database('connection1');
-  return client;
-  */
+  // closing the connection?
 };
