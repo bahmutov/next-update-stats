@@ -49,6 +49,7 @@
     "grunt-deps-ok": "~0.1.7",
     "grunt-nice-package": "~0.1.5",
     "grunt-jsonlint": "~1.0.4",
-    "grunt-jshint-solid": "0.0.1"
+    "grunt-jshint-solid": "0.0.1",
+    "grunt-bump": "0.0.13"
   }
 }
