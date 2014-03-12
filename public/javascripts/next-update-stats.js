@@ -1,4 +1,6 @@
 (function (angular) {
+  'use strict';
+  /* global check, _, localStorage, document */
   var verify = check.verify;
 
   var app = angular.module('next-update-stats', []);
@@ -85,6 +87,10 @@
           }
         });
       });
+
+      $scope.successCSS = function () {
+        return 'successful';
+      };
     }
 
     $scope.loadStats = function () {
@@ -111,7 +117,8 @@
     function fetchTotals() {
       $http.get('/total/packages')
       .then(function (data) {
-        verify.positiveNumber(data.data.totalPackages, 'invalid total packages ' + data.data.totalPackages);
+        verify.positiveNumber(data.data.totalPackages,
+          'invalid total packages ' + data.data.totalPackages);
         var totalPackages = data.data.totalPackages;
         localStorage.setItem('packages', JSON.stringify(totalPackages));
         var packagesAnimation = new countUp('packages', totalPackages, 0, 100);

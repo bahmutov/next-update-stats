@@ -40,6 +40,7 @@ block content
       tbody
         tr(ng-repeat="row in info")
           td(ng-repeat="update in row track by $index",
+            ng-class="{{$first ? '' : successCSS(update) }}",
             title="{{$first ? 'Updating from version ' + update : update ? update.success + ' successful, ' + update.failure + ' failed' : 'No information available'}}").
             {{$first ? update : (update.probability|percent:0) }}
 
