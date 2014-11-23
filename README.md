@@ -1,4 +1,4 @@
-# next-update-stats v0.1.3
+# next-update-stats v0.2.0
 
 > Collects anonymous nodejs module version upgrade statistics
 
