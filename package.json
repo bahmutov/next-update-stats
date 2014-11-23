@@ -2,6 +2,37 @@
   "name": "next-update-stats",
   "description": "Collects anonymous nodejs module version upgrade statistics",
   "version": "0.1.3",
+  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/bahmutov/next-update-stats/issues"
+  },
+  "dependencies": {
+    "check-types": "^1.2.0",
+    "express": "^4.0.0-rc3",
+    "jade": "^1.3.0",
+    "marked": "^0.3.2",
+    "mongodb": "^1.4.0-rc8",
+    "poseidon-mongo": "^0.2.0",
+    "q": "^1.0.1",
+    "semver": "~2.2.1"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.3",
+    "grunt-bump": "0.0.13",
+    "grunt-complexity": "~0.1.4",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-deps-ok": "^0.1.8",
+    "grunt-jshint-solid": "^0.1.0",
+    "grunt-jsonlint": "~1.0.4",
+    "grunt-nice-package": "^0.2.3",
+    "grunt-readme": "~0.4.5",
+    "gt": "^0.8.34",
+    "jshint-stylish": "~0.1.5",
+    "matchdep": "~0.3.0",
+    "nodemon": "^1.0.15",
+    "pre-git": "0.0.15",
+    "time-grunt": "^0.2.10"
+  },
   "keywords": [
     "npm",
     "node",
@@ -10,46 +41,15 @@
     "upgrade",
     "statistics"
   ],
-  "private": false,
-  "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "license": "MIT",
+  "pre-commit": "npm test",
+  "private": false,
   "repository": {
     "type": "git",
     "url": "git@github.com:bahmutov/next-update-stats.git"
   },
-  "bugs": {
-    "url": "https://github.com/bahmutov/next-update-stats/issues"
-  },
   "scripts": {
     "start": "node ./node_modules/nodemon/bin/nodemon.js --ignore public/ app.js",
     "test": "node ./node_modules/gt ./db/**/test/*.js ./routes/**/test/*.js --output"
-  },
-  "pre-commit": "npm test",
-  "dependencies": {
-    "express": "^4.0.0-rc3",
-    "jade": "^1.3.0",
-    "poseidon-mongo": "^0.2.0",
-    "check-types": "^1.2.0",
-    "q": "^1.0.1",
-    "semver": "~2.2.1",
-    "mongodb": "^1.4.0-rc8",
-    "marked": "^0.3.2"
-  },
-  "devDependencies": {
-    "nodemon": "^1.0.15",
-    "gt": "^0.8.34",
-    "pre-git": "0.0.15",
-    "grunt-readme": "~0.4.5",
-    "time-grunt": "^0.2.10",
-    "grunt": "^0.4.3",
-    "grunt-contrib-jshint": "~0.8.0",
-    "grunt-complexity": "~0.1.4",
-    "jshint-stylish": "~0.1.5",
-    "matchdep": "~0.3.0",
-    "grunt-deps-ok": "^0.1.8",
-    "grunt-nice-package": "^0.2.3",
-    "grunt-jsonlint": "~1.0.4",
-    "grunt-jshint-solid": "^0.1.0",
-    "grunt-bump": "0.0.13"
   }
 }
