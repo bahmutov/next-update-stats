@@ -59,7 +59,7 @@
     "url": "git@github.com:bahmutov/next-update-stats.git"
   },
   "scripts": {
-    "start": "nodemon --ignore public/ app.js",
+    "start": "node app.js",
     "test": "gt ./db/**/test/*.js ./routes/**/test/*.js --output"
   }
 }
