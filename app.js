@@ -37,10 +37,12 @@ if (!username || !password) {
   process.exit(-1);
 }
 initDB(username, password).then(startServer, function (err) {
+  console.log('could not init DB');
   console.error(err.stack);
 });
 
 function startServer(db) {
+  console.log('starting server');
   var updatesCollection = db.collection('updates');
   var update = require('./routes/update')(updatesCollection);
   app.post('/update', update.update);
