@@ -6,6 +6,7 @@
   "bugs": {
     "url": "https://github.com/bahmutov/next-update-stats/issues"
   },
+  "contributors": [],
   "dependencies": {
     "check-types": "1.4.0",
     "express": "4.10.2",
@@ -46,6 +47,7 @@
     "statistics"
   ],
   "license": "MIT",
+  "main": "app.js",
   "pre-commit": "npm test",
   "private": false,
   "repository": {
