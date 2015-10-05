@@ -4,6 +4,7 @@ var initDB = require('./db/init');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var initCrashReporter = require('crash-reporter-middleware');
 
 var http = require('http');
 var path = require('path');
@@ -12,34 +13,29 @@ Q.longStackSupport = true;
 
 var app = express();
 
-// all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-if (app.get('env') === 'development') {
-  app.locals.pretty = true;
-}
-app.use(morgan('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(methodOverride('X-HTTP-Method-Override'));
-app.use(express.static(path.join(__dirname, 'public')));
+function initServer(crashReporter) {
+  // all environments
+  app.set('port', process.env.PORT || 3000);
+  app.set('views', path.join(__dirname, 'views'));
+  app.set('view engine', 'jade');
+  if (app.get('env') === 'development') {
+    app.locals.pretty = true;
+  }
+  app.use(morgan('dev'));
+  app.use(bodyParser.json());
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(methodOverride('X-HTTP-Method-Override'));
+  app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', routes.index);
-app.get('/version', function (req, res) {
-  res.send(require('./package.json').version);
-});
+  if (crashReporter) {
+    app.use(crashReporter);
+  }
 
-var username = process.env.STATS_DB_USERNAME;
-var password = process.env.STATS_DB_PASSWORD;
-if (!username || !password) {
-  console.error('missing db username or password');
-  process.exit(-1);
+  app.get('/', routes.index);
+  app.get('/version', function (req, res) {
+    res.send(require('./package.json').version);
+  });
 }
-initDB(username, password).then(startServer, function (err) {
-  console.log('could not init DB');
-  console.error(err.stack);
-});
 
 function startServer(db) {
   console.log('starting server');
@@ -58,4 +54,30 @@ function startServer(db) {
     console.log('Express server listening on port ' + app.get('port'));
   });
 }
+
+function connectToDb() {
+  var username = process.env.STATS_DB_USERNAME;
+  var password = process.env.STATS_DB_PASSWORD;
+  if (!username || !password) {
+    console.error('missing db username or password');
+    process.exit(-1);
+  }
+
+  return initDB(username, password);
+}
+
+function onError(err) {
+  console.log('could not init DB or start server');
+  console.error(err.stack);
+}
+
+function getEnv(key) {
+  return process.env[key];
+}
+
+initCrashReporter(getEnv, app)
+  .then(connectToDb)
+  .then(startServer, onError)
+  .done();
+
 
