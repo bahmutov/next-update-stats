@@ -7,6 +7,7 @@
 [![Build status][next-update-stats-ci-image] ][next-update-stats-ci-url]
 [![dependencies][next-update-stats-dependencies-image] ][next-update-stats-dependencies-url]
 [![devdependencies][next-update-stats-devdependencies-image] ][next-update-stats-devdependencies-url]
+[![Circle CI](https://circleci.com/gh/bahmutov/next-update-stats.svg?style=svg) ](https://circleci.com/gh/bahmutov/next-update-stats)
 
 [next-update-stats-icon]: https://nodei.co/npm/next-update-stats.png?downloads=true
 [next-update-stats-url]: https://npmjs.org/package/next-update-stats
