@@ -2,6 +2,7 @@ var express = require('express');
 var routes = require('./routes');
 var initDB = require('./db/init');
 var morgan = require('morgan');
+var errorhandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var initCrashReporter = require('crash-reporter-middleware');
@@ -49,7 +50,7 @@ function startServer(db) {
   app.get('/total/packages', package.totalPackages);
   app.get('/total/updates', package.totalUpdates);
 
-  app.use(express.errorHandler());
+  app.use(errorHandler());
   http.createServer(app).listen(app.get('port'), function onStarted() {
     console.log('Express server listening on port ' + app.get('port'));
   });
