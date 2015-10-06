@@ -58,7 +58,10 @@
   ],
   "license": "MIT",
   "main": "app.js",
-  "pre-commit": "npm test",
+  "pre-commit": [
+    "npm test",
+    "npm version"
+  ],
   "private": false,
   "repository": {
     "type": "git",
