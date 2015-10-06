@@ -10,7 +10,7 @@
   "dependencies": {
     "body-parser": "1.14.1",
     "check-types": "1.4.0",
-    "crash-reporter-middleware": "1.2.3",
+    "crash-reporter-middleware": "1.2.4",
     "crasher": "0.1.0",
     "errorhandler": "1.4.2",
     "express": "4.10.2",
@@ -20,7 +20,7 @@
     "mongodb": "2.0.7",
     "morgan": "1.6.1",
     "poseidon-mongo": "0.2.0",
-    "q": "1.1.2",
+    "q": "1.4.1",
     "semver": "4.1.0",
     "serve-favicon": "2.3.0"
   },
