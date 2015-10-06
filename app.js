@@ -13,10 +13,10 @@ var Q = require('q');
 Q.longStackSupport = true;
 
 var app = express();
+var port = process.env.PORT || 3000;
 
 function initServer(crashReporter) {
   // all environments
-  app.set('port', process.env.PORT || 3000);
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
   if (app.get('env') === 'development') {
@@ -51,8 +51,8 @@ function startServer(db) {
   app.get('/total/updates', package.totalUpdates);
 
   app.use(errorHandler());
-  http.createServer(app).listen(app.get('port'), function onStarted() {
-    console.log('Express server listening on port ' + app.get('port'));
+  http.createServer(app).listen(port, function onStarted() {
+    console.log('Express server listening on port %d', port);
   });
 }
 
@@ -77,6 +77,7 @@ function getEnv(key) {
 }
 
 initCrashReporter(getEnv, app)
+  .then(initServer)
   .then(connectToDb)
   .then(startServer, onError)
   .done();
