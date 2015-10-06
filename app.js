@@ -29,7 +29,10 @@ function initServer(crashReporter) {
   app.use(express.static(path.join(__dirname, 'public')));
 
   if (check.fn(crashReporter)) {
+    console.log('using crash reporter');
     app.use(crashReporter);
+  } else {
+    console.log('running without crash reporter');
   }
 
   app.get('/api/crash', require('crasher'));
