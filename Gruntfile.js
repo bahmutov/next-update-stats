@@ -10,7 +10,7 @@ module.exports = function (grunt) {
         reporter: require('jshint-stylish')
       },
       all: {
-        src: [ '*.js' ]
+        src: [ '*.js', 'routes/*.js', 'test-e2e/*.js' ]
       }
     },
     jsonlint: {

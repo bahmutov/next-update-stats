@@ -2,7 +2,7 @@ var check = require('check-types');
 var verify = check.verify;
 var semver = require('semver');
 
-module.exports = function (update) {
+module.exports = function validate(update) {
   verify.object(update, 'expected JSON update info object');
 
   verify.unemptyString(update.name, 'missing name string ' +
@@ -34,4 +34,4 @@ module.exports = function (update) {
     throw new Error('from version should be less than to version',
       JSON.stringify(update, null, 2));
   }
-}
+};

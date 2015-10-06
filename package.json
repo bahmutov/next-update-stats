@@ -1,7 +1,7 @@
 {
   "name": "next-update-stats",
   "description": "Collects anonymous nodejs module version upgrade statistics",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "author": "Gleb Bahmutov <gleb.bahmutov@gmail.com>",
   "bugs": {
     "url": "https://github.com/bahmutov/next-update-stats/issues"
@@ -41,6 +41,7 @@
     "matchdep": "0.3.0",
     "nodemon": "1.2.1",
     "pre-git": "0.1.1",
+    "request-promise-json": "1.0.4",
     "time-grunt": "1.0.0"
   },
   "engines": {
@@ -65,6 +66,7 @@
   },
   "scripts": {
     "start": "node app.js",
-    "test": "gt ./db/**/test/*.js ./routes/**/test/*.js --output"
+    "test": "gt ./db/**/test/*.js ./routes/**/test/*.js --output",
+    "is-deployed": "node test-e2e/is-deployed.js"
   }
 }

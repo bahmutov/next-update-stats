@@ -11,13 +11,13 @@ module.exports = function (updatesCollection) {
           res.send(500);
           return;
         }
-        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
-        res.header("Pragma", "no-cache");
-        res.header("Expires", 0);
+        res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.header('Pragma', 'no-cache');
+        res.header('Expires', 0);
         res.send({
           totalPackages: count
         });
-      })
+      });
     },
 
     totalUpdates: function (req, res) {
@@ -36,9 +36,9 @@ module.exports = function (updatesCollection) {
             res.send(500);
             return;
           }
-          res.header("Cache-Control", "no-cache, no-store, must-revalidate");
-          res.header("Pragma", "no-cache");
-          res.header("Expires", 0);
+          res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+          res.header('Pragma', 'no-cache');
+          res.header('Expires', 0);
           res.send({
             success: data[0].success,
             failure: data[0].failure

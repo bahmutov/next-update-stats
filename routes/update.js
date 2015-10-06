@@ -2,7 +2,7 @@ var check = require('check-types');
 var verify = check.verify;
 var validate = require('./validate-update');
 
-module.exports = function (updatesCollection) {
+module.exports = function update(updatesCollection) {
   return {
     update: function (req, res) {
       var untrusted = req.body;
@@ -39,4 +39,4 @@ module.exports = function (updatesCollection) {
       });
     }
   };
-}
+};
