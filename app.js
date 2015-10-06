@@ -17,6 +17,8 @@ Q.longStackSupport = true;
 var app = express();
 var port = process.env.PORT || 3000;
 
+console.log('process.env', process.env);
+
 function initServer() {
   // all environments
   app.set('views', path.join(__dirname, 'views'));
