@@ -11,6 +11,7 @@
     "body-parser": "1.14.1",
     "check-types": "1.4.0",
     "crash-reporter-middleware": "1.2.3",
+    "crasher": "0.1.0",
     "errorhandler": "1.4.2",
     "express": "4.10.2",
     "jade": "1.7.0",

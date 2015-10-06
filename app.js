@@ -28,10 +28,11 @@ function initServer(crashReporter) {
   app.use(methodOverride('X-HTTP-Method-Override'));
   app.use(express.static(path.join(__dirname, 'public')));
 
-  if (crashReporter) {
+  if (check.fn(crashReporter)) {
     app.use(crashReporter);
   }
 
+  app.get('/api/crash', require('crasher'));
   app.get('/', routes.index);
   app.get('/version', function (req, res) {
     res.send(require('./package.json').version);
