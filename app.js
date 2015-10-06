@@ -1,3 +1,5 @@
+require('lazy-ass');
+var check = require('check-more-types');
 var express = require('express');
 var routes = require('./routes');
 var initDB = require('./db/init');
