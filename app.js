@@ -54,8 +54,8 @@ function startServer(crashReporter, db) {
     app.use(crashReporter);
   } else {
     console.log('running without crash reporter');
+    app.use(errorHandler());
   }
-  app.use(errorHandler());
   http.createServer(app).listen(port, function onStarted() {
     console.log('Express server listening on port %d', port);
   });
