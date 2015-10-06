@@ -11,7 +11,7 @@
     "body-parser": "1.14.1",
     "check-more-types": "2.1.1",
     "check-types": "1.4.0",
-    "crash-reporter-middleware": "1.2.5",
+    "crash-reporter-middleware": "1.2.7",
     "crasher": "0.1.0",
     "errorhandler": "1.4.2",
     "express": "4.10.2",
