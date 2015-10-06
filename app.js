@@ -15,7 +15,7 @@ Q.longStackSupport = true;
 var app = express();
 var port = process.env.PORT || 3000;
 
-function initServer(crashReporter) {
+function initServer() {
   // all environments
   app.set('views', path.join(__dirname, 'views'));
   app.set('view engine', 'jade');
@@ -28,13 +28,6 @@ function initServer(crashReporter) {
   app.use(methodOverride('X-HTTP-Method-Override'));
   app.use(express.static(path.join(__dirname, 'public')));
 
-  if (check.fn(crashReporter)) {
-    console.log('using crash reporter');
-    app.use(crashReporter);
-  } else {
-    console.log('running without crash reporter');
-  }
-
   app.get('/api/crash', require('crasher'));
   app.get('/', routes.index);
   app.get('/version', function (req, res) {
@@ -42,8 +35,10 @@ function initServer(crashReporter) {
   });
 }
 
-function startServer(db) {
+function startServer(crashReporter, db) {
   console.log('starting server');
+  la(db, 'missing database', db);
+
   var updatesCollection = db.collection('updates');
   var update = require('./routes/update')(updatesCollection);
   app.post('/update', update.update);
@@ -54,6 +49,12 @@ function startServer(db) {
   app.get('/total/packages', package.totalPackages);
   app.get('/total/updates', package.totalUpdates);
 
+  if (check.fn(crashReporter)) {
+    console.log('using crash reporter');
+    app.use(crashReporter);
+  } else {
+    console.log('running without crash reporter');
+  }
   app.use(errorHandler());
   http.createServer(app).listen(port, function onStarted() {
     console.log('Express server listening on port %d', port);
@@ -80,10 +81,9 @@ function getEnv(key) {
   return process.env[key];
 }
 
-initCrashReporter(getEnv, app)
-  .then(initServer)
-  .then(connectToDb)
-  .then(startServer, onError)
+initServer();
+Q.all([initCrashReporter(getEnv, app), connectToDb])
+  .spread(startServer, onError)
   .done();
 
 
