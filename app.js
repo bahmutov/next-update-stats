@@ -82,7 +82,7 @@ function getEnv(key) {
 }
 
 initServer();
-Q.all([initCrashReporter(getEnv, app), connectToDb])
+Q.all([initCrashReporter(getEnv, app), connectToDb()])
   .spread(startServer, onError)
   .done();
 
